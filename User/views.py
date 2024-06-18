@@ -76,16 +76,16 @@ class CheckEmail(APIView):
 
 
 class PutPassword(APIView):
+    authentication_classes = [JWTAuthentication]
 
     def put(self, request):
-        email = request.data.get('email')
         password = request.data.get('password')
 
-        user = User.objects.get(email=email)
-        user.set_password(password)
-        user.save()
+        user_data = request.user
+        user_data.set_password(password)
+        user_data.save()
 
-        user_serializer = UserSerializer(user)
+        user_serializer = UserSerializer(user_data)
         return Response({"meta": {"status-code": 200, "message": "password set"},
                          "data": {
                              "user": user_serializer.data}
@@ -142,6 +142,6 @@ class LoginWithPassword(APIView):
                              },
                             status=status.HTTP_200_OK)
         else:
-            return Response({"meta": {"status-code": 400,
+            return Response({"meta": {"status-code": 401,
                                       "message": "Wrong Password"}},
                             status=status.HTTP_401_UNAUTHORIZED)
