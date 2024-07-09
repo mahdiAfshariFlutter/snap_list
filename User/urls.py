@@ -1,10 +1,9 @@
 from django.urls import path
 
-from User.views import CheckEmail, CheckOtpCode, LoginWithPassword, PutPassword
+from User.views import UpdateUser, OtpPass, LoginRegister
 
 urlpatterns = [
-    path('check_email/', CheckEmail.as_view()),
-    path('check_code/', CheckOtpCode.as_view()),
-    path('put_password/', PutPassword.as_view()),
-    path('login_with_password/', LoginWithPassword.as_view()),
+    path('login_register/', LoginRegister.as_view()),
+    path('otp_pass/', OtpPass.as_view()),
+    path('user/', UpdateUser.as_view()),
 ]
