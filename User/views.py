@@ -112,8 +112,6 @@ class LoginRegister(APIView):
 
 
 class OtpPass(APIView):
-    # authentication_classes = [JWTAuthentication]
-
     def post(self, request):
         email = request.data.get('email')
         otp_code = request.data.get('otp_code')
@@ -169,7 +167,6 @@ class OtpPass(APIView):
                                         status=status.HTTP_401_UNAUTHORIZED)
         elif change_email is True:
 
-            # Perform JWT authentication only if change_email is True
             jwt_auth = JWTAuthentication()
             try:
                 user, token = jwt_auth.authenticate(request)

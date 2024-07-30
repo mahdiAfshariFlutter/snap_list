@@ -11,8 +11,16 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'email', 'avatar']
 
 
+class TaskDetailDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Task
+        fields = ['id', 'title', 'priority', 'creator', 'is_done', 'doe_date', 'assign_users',
+                  'type', 'created_at']
+
+
 class TeamSerializer(serializers.ModelSerializer):
     creator = UserSerializer()
+    tasks = TaskDetailDetailSerializer(many=True)
 
     class Meta:
         model = Team
