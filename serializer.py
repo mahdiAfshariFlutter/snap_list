@@ -35,9 +35,9 @@ class TeamDetailSerializer(serializers.ModelSerializer):
 
 class TaskSerializer(serializers.ModelSerializer):
     creator = UserSerializer()
-    team_detail = TeamDetailSerializer()
+    team = TeamDetailSerializer()
 
     class Meta:
         model = Task
         fields = ['id', 'title', 'priority', 'creator', 'is_done', 'doe_date', 'assign_users',
-                  'type', 'created_at', 'team_detail']
+                  'type', 'created_at', 'team']

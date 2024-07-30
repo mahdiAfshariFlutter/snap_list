@@ -20,7 +20,7 @@ class CreateTeam(APIView):
 
         team_serializer = TeamSerializer(team)
 
-        return Response({"meta": {"status-code": 200, "message": "success"},
+        return Response({"meta": {"status-code": 200, "message": "success , team created"},
                          "data": team_serializer.data
                          },
                         status=status.HTTP_200_OK)
@@ -46,7 +46,7 @@ class UpdateTeam(APIView):
 
         team_serializer = TeamSerializer(team)
 
-        return Response({"meta": {"status-code": 200, "message": "success"},
+        return Response({"meta": {"status-code": 200, "message": "success , team updated"},
                          "data": team_serializer.data
                          },
                         status=status.HTTP_200_OK)
