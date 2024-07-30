@@ -198,6 +198,9 @@ class OtpPass(APIView):
                                          "refresh_token": str(refresh)}
                                      },
                                     status=status.HTTP_200_OK)
+                else:
+                    return Response({"meta": {"status-code": 400, "message": "Wrong Code"}},
+                                    status=status.HTTP_400_BAD_REQUEST)
 
 
 class UpdateUser(APIView):
@@ -240,3 +243,12 @@ class UpdateUser(APIView):
                                  "user": user_serializer.data}
                              },
                             status=status.HTTP_200_OK)
+
+
+class GetUser(APIView):
+    authentication_classes = [JWTAuthentication]
+
+    def get(self, request):
+        user_data = request.user
+        user_serializer = UserSerializer(user_data)
+        return Response({"meta": {"status-code": 200, "message": "success"}, "data": user_serializer.data}, )
